@@ -36,6 +36,6 @@ class Repository
 	{
 		$stmt = $this->query($rawQuery, $params);
 
-		return $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $stmt->rowCount() == 1 ? $stmt->fetch(PDO::FETCH_OBJ) : $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
 }
