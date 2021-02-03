@@ -45,7 +45,28 @@ class UserController extends Controller implements IController
 
     public function put($id)
     {
+        $input = $this->input();
 
+        $user = new User();
+
+        $user->setName($input->name);
+        $user->setContactNo($input->contact_no);
+        $user->setEmail($input->email);
+        $user->setPassword($input->password);
+        $user->setProfile($input->profile);
+        $user->setType($input->type);
+        $user->setCreatedOn($input->created_on);
+        $user->setStatus($input->status);
+
+        $userService = new UserService();
+
+        if ($userService->validate($user)) {
+
+            $userRepository = new UserRepository();
+
+            return $userRepository->update($user, $id);
+
+        }
     }
 
     public function delete($id)

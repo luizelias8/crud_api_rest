@@ -46,4 +46,32 @@ class UserRepository extends Repository
 
 		return $stmt->rowCount();
 	}
+
+	public function update(User $user, $id)
+	{
+		$stmt = $this->query("
+			UPDATE user 
+			SET name = :name, 
+			contact_no = :contact_no, 
+			email = :email, 
+			password = :password, 
+			profile = :profile, 
+			type = :type, 
+			status = :status, 
+			created_on = :created_on
+			WHERE id = :id
+		", [
+			":name" => $user->getName(), 
+			":contact_no" => $user->getContactNo(), 
+			":email" => $user->getEmail(), 
+			":password" => $user->getPassword(), 
+			":profile" => $user->getProfile(), 
+			":type" => $user->getType(), 
+			":status" => $user->getStatus(), 
+			":created_on" => $user->getCreatedOn(), 
+			":id" => $id
+		]);
+
+		return $stmt->rowCount();
+	}
 }
