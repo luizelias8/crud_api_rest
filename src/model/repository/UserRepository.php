@@ -39,4 +39,11 @@ class UserRepository extends Repository
 		
 		return $stmt->rowCount();
 	}
+
+	public function delete($id)
+	{
+		$stmt = $this->query("DELETE FROM user WHERE id = :id", [":id" => $id]);
+
+		return $stmt->rowCount();
+	}
 }

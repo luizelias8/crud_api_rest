@@ -50,6 +50,8 @@ class UserController extends Controller implements IController
 
     public function delete($id)
     {
-        
+        $userRepository = new UserRepository();
+
+        return $userRepository->delete($id);
     }
 }
