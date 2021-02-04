@@ -8,19 +8,6 @@ use Webslesson\Model\Entity\User;
 
 class UserRepository extends Repository
 {
-	public function read($id = null)
-	{
-		if ($id) {
-
-			return $this->select("SELECT * FROM user WHERE :id = id", [":id" => $id]);
-
-		} else {
-
-			return $this->select("SELECT * FROM user");
-
-		}		
-	}
-
 	public function create(User $user)
 	{
 		$stmt = $this->query("
@@ -40,11 +27,17 @@ class UserRepository extends Repository
 		return $stmt->rowCount();
 	}
 
-	public function delete($id)
+	public function read($id = null)
 	{
-		$stmt = $this->query("DELETE FROM user WHERE id = :id", [":id" => $id]);
+		if ($id) {
 
-		return $stmt->rowCount();
+			return $this->select("SELECT * FROM user WHERE :id = id", [":id" => $id]);
+
+		} else {
+
+			return $this->select("SELECT * FROM user");
+
+		}		
 	}
 
 	public function update(User $user, $id)
@@ -74,4 +67,11 @@ class UserRepository extends Repository
 
 		return $stmt->rowCount();
 	}
+
+	public function delete($id)
+	{
+		$stmt = $this->query("DELETE FROM user WHERE id = :id", [":id" => $id]);
+
+		return $stmt->rowCount();
+	}	
 }
