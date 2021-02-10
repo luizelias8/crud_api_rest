@@ -5,8 +5,9 @@ namespace Webslesson\Model\Repository;
 use Webslesson\Model\Repository\Repository;
 use PDO;
 use Webslesson\Model\Entity\User;
+use Webslesson\Model\Repository\IUserRepository;
 
-class UserRepository extends Repository
+class UserRepository extends Repository implements IUserRepository
 {
 	public function create(User $user)
 	{
